@@ -10,4 +10,6 @@ public interface JpaTaskRepository extends JpaRepository<TaskEntity, Long> {
     List<TaskEntity> findAllByOwnerIdOrderByCreatedAtDesc(Long ownerId);
 
     Optional<TaskEntity> findByIdAndOwnerId(Long id, Long ownerId);
+
+    void deleteByOwnerId(Long ownerId);
 }

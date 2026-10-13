@@ -38,4 +38,9 @@ public class TaskRepositoryAdapter implements TaskRepository {
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllByOwnerId(Long ownerId) {
+        jpaRepository.deleteByOwnerId(ownerId);
+    }
 }

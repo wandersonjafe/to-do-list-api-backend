@@ -14,4 +14,7 @@ public interface TaskRepository {
     List<Task> findAllByOwnerId(Long ownerId);
 
     void deleteById(Long id);
+
+    void deleteAllByOwnerId(Long ownerId);
+
 }

@@ -3,6 +3,7 @@ package com.wanderson.todolist.presentation.rest;
 import com.wanderson.todolist.application.dto.CreateTaskCommand;
 import com.wanderson.todolist.application.dto.TaskResponse;
 import com.wanderson.todolist.application.dto.UpdateTaskCommand;
+import com.wanderson.todolist.application.usecase.DeleteAllTasksUseCase;
 import com.wanderson.todolist.application.usecase.CompleteTaskUseCase;
 import com.wanderson.todolist.application.usecase.CreateTaskUseCase;
 import com.wanderson.todolist.application.usecase.DeleteTaskUseCase;
@@ -36,19 +37,22 @@ public class TaskController {
     private final CompleteTaskUseCase completeTask;
     private final ReopenTaskUseCase reopenTask;
     private final DeleteTaskUseCase deleteTask;
+    private final DeleteAllTasksUseCase deleteAllTasks;
 
     public TaskController(CreateTaskUseCase createTask,
                           ListTaskUseCase listTasks,
                           UpdateTaskUseCase updateTask,
                           CompleteTaskUseCase completeTask,
                           ReopenTaskUseCase reopenTask,
-                          DeleteTaskUseCase deleteTask) {
+                          DeleteTaskUseCase deleteTask,
+                          DeleteAllTasksUseCase deleteAllTasks) {
         this.createTask = createTask;
         this.listTasks = listTasks;
         this.updateTask = updateTask;
         this.completeTask = completeTask;
         this.reopenTask = reopenTask;
         this.deleteTask = deleteTask;
+        this.deleteAllTasks = deleteAllTasks;
     }
 
     @GetMapping
@@ -84,6 +88,12 @@ public class TaskController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal Jwt jwt, @PathVariable Long id) {
         deleteTask.execute(userId(jwt), id);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAll(@AuthenticationPrincipal Jwt jwt) {
+        deleteAllTasks.execute(userId(jwt));
     }
 
     private Long userId(Jwt jwt) {
