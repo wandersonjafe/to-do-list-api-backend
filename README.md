@@ -221,9 +221,3 @@ O Hibernate roda com `ddl-auto=validate`: ele apenas confere se as entidades bat
 - Sessão stateless e CSRF desabilitado, já que a autenticação é por token no header
 - O usuário é identificado pelo token, e nunca por um dado enviado no corpo da requisição
 - A mensagem de erro do login é a mesma para e-mail inexistente e senha errada
-
-## Próximos passos
-
-- Front-end em React + TypeScript (repositório separado)
-- Deploy da API no Railway e do front na Vercel
-- Testes automatizados dos casos de uso
