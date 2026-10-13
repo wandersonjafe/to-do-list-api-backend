@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17
+    container_name: todolist-db
+    environment:
+      POSTGRES_DB: todolist
+      POSTGRES_USER: todolist
+      POSTGRES_PASSWORD: todolist
+    ports:
+      - "5432:5432"
+    volumes:
+      - todolist-data:/var/lib/postgresql/data
+
+volumes:
+  todolist-data:
